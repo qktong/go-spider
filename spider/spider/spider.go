@@ -1,7 +1,7 @@
 package spider
 
 import (
-	"fmt"
+	// "fmt"
 	"github.com/qktong/go-spider/spider/downloader"
 )
 
@@ -14,7 +14,7 @@ type Spider struct {
 }
 
 func CreateSpider() *Spider {
-	fmt.Println("create spider")
+	// fmt.Println("create spider")
 
 	spider := &Spider{Name: "spider name"}
 
