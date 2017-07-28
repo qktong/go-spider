@@ -3,7 +3,7 @@ package scheduler
 import (
 	"fmt"
 	"github.com/qktong/go-spider/spider/spider"
-	"strconv"
+	"github.com/qktong/go-spider/spider/task"
 	"time"
 )
 
@@ -16,12 +16,11 @@ func Start() {
 
 	for crawl := 0; crawl < 1; crawl++ {
 		go func(crawl int) {
-			for thread_num := 0; thread_num < 3; thread_num++ {
-				go func(crawl int, thread_num int) {
-					s := spider.CreateSpider()
-					s.Downloader.Download("===================crawl:" + strconv.Itoa(crawl) + "thread_num" + strconv.Itoa(thread_num))
-				}(crawl, thread_num)
-			}
+			s := spider.CreateSpider()
+			tt := task.NewTask(10)
+			go tt.DoTask(s)
+			go tt.SendTask(s)
+
 		}(crawl)
 		// time.Sleep(time.Second)
 	}

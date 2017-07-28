@@ -14,7 +14,6 @@ type Spider struct {
 }
 
 func CreateSpider() *Spider {
-	// fmt.Println("create spider")
 
 	spider := &Spider{Name: "spider name"}
 
