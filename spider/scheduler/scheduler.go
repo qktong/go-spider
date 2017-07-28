@@ -2,8 +2,10 @@ package scheduler
 
 import (
 	"fmt"
+	"github.com/qktong/go-spider/spider/analyzer"
 	"github.com/qktong/go-spider/spider/spider"
 	"github.com/qktong/go-spider/spider/task"
+	"strconv"
 	"time"
 )
 
@@ -13,20 +15,26 @@ func init() {
 
 func Start() {
 	fmt.Println("sched start")
-
-	for crawl := 0; crawl < 1; crawl++ {
+	// sign := make(chan int)
+	for crawl := 0; crawl < 3; crawl++ {
 		go func(crawl int) {
-			s := spider.CreateSpider()
-			tt := task.NewTask(10)
-			go tt.DoTask(s)
-			go tt.SendTask(s)
+			spiderName := "crawl" + strconv.Itoa(crawl)
+			threadNum := 30
+			s := spider.CreateSpider(spiderName, threadNum)
+			t := task.NewTask()
+			a := analyzer.NewAnalyzer()
+			go t.DoTask(s)
+			go t.SendTask(s)
+			go a.DoAnalyze(s)
 
 		}(crawl)
-		// time.Sleep(time.Second)
 	}
-	time.Sleep(time.Second * 10)
+	// <-sign
 }
 
 func Stop() {
-	fmt.Println("sched stop")
+	go func() {
+		time.Sleep(time.Second * 10)
+		// sign <- 1
+	}()
 }

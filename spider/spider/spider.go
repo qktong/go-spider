@@ -10,12 +10,16 @@ type Spider struct {
 
 	Downloader downloader.Downloader
 
-	ThreadNum uint
+	ThreadNum int
+
+	PagesChan chan string
+
+	TaskChan chan string
 }
 
-func CreateSpider() *Spider {
+func CreateSpider(name string, threadNum int) *Spider {
 
-	spider := &Spider{Name: "spider name"}
+	spider := &Spider{Name: name, ThreadNum: threadNum, TaskChan: make(chan string, threadNum), PagesChan: make(chan string, threadNum)}
 
 	if spider.Downloader == nil {
 		spider.setDownloader(downloader.NewHttpDownloader())

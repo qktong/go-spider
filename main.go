@@ -11,7 +11,10 @@ func init() {
 }
 
 func main() {
+	sign := make(chan int, 1)
+
 	fmt.Println("main")
 	scheduler.Start()
 
+	<-sign
 }
