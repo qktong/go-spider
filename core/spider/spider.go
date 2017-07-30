@@ -2,7 +2,7 @@ package spider
 
 import (
 	// "fmt"
-	"github.com/qktong/go-spider/spider/downloader"
+	"github.com/qktong/go-spider/core/downloader"
 )
 
 type Spider struct {

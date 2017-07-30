@@ -4,10 +4,6 @@ import (
 	"fmt"
 )
 
-type Downloader interface {
-	Download(url string) string
-}
-
 type HttpDownloader struct {
 }
 

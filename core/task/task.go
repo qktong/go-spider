@@ -2,7 +2,7 @@ package task
 
 import (
 	"fmt"
-	"github.com/qktong/go-spider/spider/spider"
+	"github.com/qktong/go-spider/core/spider"
 	"math/rand"
 	"strconv"
 	"time"
@@ -16,23 +16,23 @@ func NewTask() *Task {
 	return t
 }
 
-func (this *Task) SendTask(s *spider.Spider) {
+func (this *Task) SendTask(spider *spider.Spider) {
 	tryTime := 1
 	for true {
 		num := rand.Int31n(10)
-		if num < 1 {
-			duration := time.Duration(1 * tryTime * tryTime)
+		if num < 3 {
+			duration := time.Duration(10 * tryTime * tryTime)
 			s, _ := time.ParseDuration("+1s")
 			nextTime := time.Now().Add(s * duration).Format("2006-01-02 15:04:05")
-			fmt.Println("暂时没有获取到任务 重度次数：" + strconv.Itoa(tryTime) + " 下次重试时间： " + nextTime)
+			fmt.Println(spider.Name + "暂时没有获取到任务 重度次数：" + strconv.Itoa(tryTime) + " 下次重试时间： " + nextTime)
 			time.Sleep(time.Second * duration)
 			tryTime++
 		} else {
 			tryTime = 1
 			fmt.Println("send a task")
-			s.TaskChan <- time.Now().Format("2006-01-02 15:04:05")
+			spider.TaskChan <- time.Now().Format("2006-01-02 15:04:05")
 		}
-		fmt.Println("队列名：", s.Name, "队列长度:", len(s.TaskChan))
+		fmt.Println("队列名：", spider.Name, "队列长度:", len(spider.TaskChan))
 	}
 
 }

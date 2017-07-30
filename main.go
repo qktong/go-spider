@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/qktong/go-spider/spider/scheduler"
+	"github.com/qktong/go-spider/core/scheduler"
 )
 
 func init() {
