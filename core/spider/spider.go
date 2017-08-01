@@ -32,6 +32,7 @@ func (this *Spider) setDownloader(d downloader.Downloader) *Spider {
 	this.Downloader = d
 	return this
 }
+
 func (this *Spider) getDownloader() downloader.Downloader {
 	return this.Downloader
 }

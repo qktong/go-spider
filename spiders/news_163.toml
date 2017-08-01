@@ -1,0 +1,26 @@
+# 网易新闻
+
+
+#爬虫名字
+name = "网易新闻"
+
+#是否启用
+enable=true
+
+#并发数
+threadNum=30
+
+#爬虫入口 每次启动必爬
+index=["http://news.163.com/","http://auto.163.com/","http://tech.163.com/"]
+
+#允许爬取网站的域名
+domain = ["news.163.com","tech.163.com","auto.163.com"]
+
+#抓取的目标规则 goquery
+[target]
+  [target.title]
+  name="title"
+  selector = "title"
+  regexp = ""
+
+

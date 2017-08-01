@@ -16,5 +16,6 @@ func main() {
 	fmt.Println("main")
 	scheduler.Start()
 
+	sign <- 1
 	<-sign
 }
